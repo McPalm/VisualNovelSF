@@ -11,17 +11,21 @@ public class PrintingText : MonoBehaviour
 
     public Text textBox;
 
-    // Use this for initialization
-    void Start ()
+    bool isPrinting = false;
+
+    public bool IsPrinting
     {
-        PrintText("Hello world!" +
-            "\nThis is a test text. It should be reasonably wordy just so we can se it print out slowly and neatly.");
+        get
+        {
+            return isPrinting;
+        }
     }
 
     public void PrintText(string text)
     {
         StopAllCoroutines();
         StartCoroutine(PrintTextCooroutine(text));
+        isPrinting = true;
     }
 
     IEnumerator PrintTextCooroutine(string text)
@@ -43,6 +47,7 @@ public class PrintingText : MonoBehaviour
             yield return null;
         }
         textBox.text = text;
+        isPrinting = false;
     }
     
 
